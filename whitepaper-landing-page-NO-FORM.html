@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Built for Machines, Staffed by Humans | Work Better Co.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #1D9E75;
+            --color-secondary: #7F77DD;
+            --color-accent: #D85A30;
+            --color-dark: #2C2C2A;
+            --color-light: #F1EFE8;
+            --color-white: #FFFFFF;
+            --color-text: #444441;
+            --color-text-muted: #888780;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            color: var(--color-text);
+            line-height: 1.7;
+            background: var(--color-white);
+            overflow-x: hidden;
+        }
+        
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        
+        .organic-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+        }
+        
+        .shape-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--color-primary);
+            top: -200px;
+            right: -100px;
+        }
+        
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--color-secondary);
+            bottom: -150px;
+            left: -150px;
+        }
+        
+        .shape-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--color-accent);
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(68, 68, 65, 0.1);
+        }
+        
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-dark);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo span {
+            color: var(--color-primary);
+        }
+        
+        .hero {
+            padding: 5rem 0 6rem;
+            text-align: center;
+        }
+        
+        .eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-dark);
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: -0.02em;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+        
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--color-primary);
+            color: var(--color-white);
+            text-decoration: none;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(29, 158, 117, 0.3);
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 158, 117, 0.4);
+            background: #178f69;
+        }
+        
+        .cta-primary svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 6rem 0;
+            animation: fadeInUp 0.6s ease-out 0.4s both;
+        }
+        
+        .stat-card {
+            background: var(--color-white);
+            border: 1px solid rgba(68, 68, 65, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+        
+        .stat-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+        
+        .content-section {
+            padding: 5rem 0;
+            border-top: 1px solid rgba(68, 68, 65, 0.1);
+        }
+        
+        .section-header {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+        
+        h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .section-intro {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .feature {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .feature::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            width: 6px;
+            height: 6px;
+            background: var(--color-primary);
+            border-radius: 50%;
+        }
+        
+        .feature h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature p {
+            color: var(--color-text);
+            line-height: 1.7;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.05), rgba(127, 119, 221, 0.05));
+            border-left: 4px solid var(--color-primary);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin: 4rem 0;
+        }
+        
+        .highlight-box p {
+            font-size: 1.375rem;
+            font-weight: 300;
+            color: var(--color-dark);
+            line-height: 1.7;
+            font-style: italic;
+        }
+        
+        .download-section {
+            background: var(--color-light);
+            padding: 5rem 0;
+            text-align: center;
+            margin-top: 5rem;
+        }
+        
+        .download-card {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+        }
+        
+        .download-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .download-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--color-white);
+        }
+        
+        .download-card h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .download-card p {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .file-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(68, 68, 65, 0.1);
+        }
+        
+        footer p {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+        
+        footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.125rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 3rem 0 4rem;
+            }
+            
+            .content-section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern">
+        <div class="organic-shape shape-1"></div>
+        <div class="organic-shape shape-2"></div>
+        <div class="organic-shape shape-3"></div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <a href="https://www.work-better.co" class="logo">Work <span>Better</span> Co.</a>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="eyebrow">White Paper 2026</div>
+                <h1>Built for Machines, Staffed by Humans</h1>
+                <p class="subtitle">Why the Modern Workplace Is Still Fighting Biology and How to Stop</p>
+                <a href="Built_for_Machines-Staffed_by_Humans_WorkBetterCo.pdf" download class="cta-primary">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Download White Paper
+                </a>
+            </div>
+        </section>
+        
+        <section class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">21%</div>
+                    <div class="stat-label">Global employee engagement in 2024 — a record low</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$438B</div>
+                    <div class="stat-label">Lost productivity annually due to disengagement</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">9%</div>
+                    <div class="stat-label">Of global GDP lost to low employee engagement</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">31%</div>
+                    <div class="stat-label">U.S. employee engagement — a 10-year low</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>The Root Cause</h2>
+                    <p class="section-intro">Despite billions invested in engagement initiatives, the needle hasn't moved. The problem isn't effort — it's a fundamental misalignment between how work is designed and how the human brain actually functions.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <p>"When work is structurally misaligned with how the brain functions, no amount of cultural programming, survey data, or leadership training can fully compensate."</p>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>Attention depletion</h3>
+                        <p>Employees spend just 47 seconds on a task before self-interrupting. Continuous partial attention raises error rates by 37% and reduces working memory accuracy by 20%.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Brain state cycling</h3>
+                        <p>The brain cycles through distinct functional states — Beta, Alpha, and Theta waves. The undifferentiated workday prevents optimal use of any of them.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Decision fatigue</h3>
+                        <p>The prefrontal cortex depletes throughout the day. Employees attending four or more consecutive meetings show a 40% decline in concentration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What This White Paper Covers</h2>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>A brief history of work</h3>
+                        <p>From the Industrial Revolution to the asynchronous age — how we got here and why industrial-era thinking persists in knowledge work.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>The engagement crisis</h3>
+                        <p>Data-driven analysis of decades of effort and persistent stagnation, and why conventional interventions fall short.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>The neuroscience imperative</h3>
+                        <p>Drawing on peer-reviewed research in cognitive neuroscience and organizational psychology, we examine the mismatch between modern work and human biology.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>The Work Better Co. approach</h3>
+                        <p>Our proprietary Friction to Flow framework translates neuroscientific insight into practical organizational architecture.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="download-section">
+            <div class="container">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>Get the Full White Paper</h3>
+                    <p>12 pages of research-backed insights on redesigning work around human neurobiology</p>
+                    <div class="file-info">
+                        <span>
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                            PDF Format
+                        </span>
+                        <span>
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                            12 Pages
+                        </span>
+                    </div>
+                    <a href="Built_for_Machines-Staffed_by_Humans_WorkBetterCo.pdf" download class="cta-primary">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Download Now
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Work Better Co. | <a href="https://www.work-better.co">www.work-better.co</a></p>
+            <p style="margin-top: 0.5rem;">Committed to reducing friction to create better work.</p>
+        </div>
+    </footer>
+</body>
+</html>
